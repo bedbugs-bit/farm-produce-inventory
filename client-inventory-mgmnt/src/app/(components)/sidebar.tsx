@@ -1,6 +1,18 @@
 "use client";
 
-import { Icon, LucideIcon, Menu } from "lucide-react";
+import {
+  Archive,
+  CreditCard,
+  FormInput,
+  Layout,
+  LucideIcon,
+  Menu,
+  Settings,
+  ShoppingBag,
+  ShoppingBasket,
+  SlidersHorizontal,
+  Users2,
+} from "lucide-react";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
@@ -20,15 +32,29 @@ const SidebarLink = ({
   label,
   isCollapsed,
 }: SidebarLinkProps) => {
-
   const pathname = usePathname();
-  const isActive = pathname === href || (pathname === "/" && href === "/dashboard");
+  const isActive =
+    pathname === href || (pathname === "/" && href === "/dashboard");
 
-  return(
-    <Link></Link>
-  )
-
-
+  return (
+    <Link href={href}>
+      <div
+        className={`cursor-pointer flex items-center ${
+          isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
+        } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${
+          isActive ? "bg-blue-200 text-white" : ""
+        }`}
+      >
+        <Icon className="w-6 h-6 !text-gray-700" />
+        <span
+          className={`${isCollapsed ? "hidden" : "block"} 
+          font-medium text-gray-700`}
+        >
+          {label}
+        </span>
+      </div>
+    </Link>
+  );
 };
 
 const Sidebar = () => {
@@ -70,7 +96,43 @@ const Sidebar = () => {
 
       {/* Sidebar Links*/}
       <div className="flex-grow mt-8">
-        <p>Links go here</p>``
+        <SidebarLink
+          href="/dashboard"
+          icon={Layout}
+          label="Dashboard"
+          isCollapsed={isSidebarCollapsed}
+        />
+
+        <SidebarLink
+          href="/inventory"
+          icon={Archive}
+          label="Inventory"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/products"
+          icon={ShoppingBag}
+          label="Products"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/users"
+          icon={Users2}
+          label="Users"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/settings"
+          icon={Settings}
+          label="Settings"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/expenses"
+          icon={CreditCard}
+          label="Expenses"
+          isCollapsed={isSidebarCollapsed}
+        />
       </div>
 
       {/* Sidebar Footer */}

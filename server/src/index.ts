@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import dashboard_route from "./routes";
 
 // Configurations
 dotenv.config();
@@ -18,9 +19,7 @@ app.use(morgan("common"));
 
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.use("/", dashboard_route)
 
 
 // Server 
